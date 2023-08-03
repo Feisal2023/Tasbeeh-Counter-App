@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [count, setCount] = useState(0);
+  const shouldReset = () => {
+    const resetMessage = window.confirm("Are you sure you want to reset");
+    if (resetMessage) {
+      setCount(0);
+    }
+  };
+
+  const handleCountClick = () => {
+    setCount(count + 1);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Tasbeeh Counter</h1>
+      <h1 className={` ${count}` > 0 ? "CountingDown" : "CountingReset"}>
+        {count}
+      </h1>
+      <div className="counting">
+        <button className="reset" onClick={shouldReset}>
+          Reset
+        </button>
+        <button className="count" onClick={handleCountClick}>
+          Count
+        </button>
+      </div>
     </div>
   );
 }
